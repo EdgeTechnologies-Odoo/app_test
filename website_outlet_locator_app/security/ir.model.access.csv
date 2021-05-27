@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-website_store_location,website_store_location,model_store_location,,1,1,1,1
-website_store_setting,website_store_setting,model_store_setting,,1,1,1,1

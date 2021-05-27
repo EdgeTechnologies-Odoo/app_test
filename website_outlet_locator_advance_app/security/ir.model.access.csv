@@ -1,3 +1,0 @@
-id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_store_category,access_store_category,model_store_category,website.group_website_designer,1,1,1,1
-access_store_category_public,access_store_category_public,model_store_category,,1,0,0,0
