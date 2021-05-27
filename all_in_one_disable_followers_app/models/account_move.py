@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
-from odoo.tools import float_is_zero, float_compare, safe_eval, date_utils, email_split, email_escape_char, email_re
+from odoo.tools import float_compare
 from datetime import datetime, timedelta
 
 class AccountMove(models.Model):
