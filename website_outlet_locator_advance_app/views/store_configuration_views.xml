@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<odoo>
+	<data>
+		<record id="locator_category" model="ir.ui.view">
+			<field name="name">Store Category</field>
+			<field name="model">store.location</field>
+			<field name="inherit_id" ref="website_outlet_locator_app.location_website_form"/>
+			<field name="arch" type="xml">
+				<xpath expr="//field[@name='email']" position="after">
+					<field name="category_id" widget="many2many_tags"/>
+					<field name="web_address"/>
+				</xpath>
+			</field>
+		</record>
+
+		<menuitem id="menu_store_category"
+            action="action_store_category"
+            parent="website_outlet_locator_app.menu_location_settings" name="Store Category"/>
+	</data>
+</odoo>

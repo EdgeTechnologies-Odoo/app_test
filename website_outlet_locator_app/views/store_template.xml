@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <data noupdate="0">
+        <record id="menu_store_locators" model="website.menu">
+            <field name="name">Outlet Locations</field>
+            <field name="url">/store/locater</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">45</field>
+        </record>
+    </data>
+
+    
+
+    <template id="assets_frontendss" inherit_id="website.assets_frontend" name="Website Event Track Assets">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/website_outlet_locator_app/static/src/css/googlemaps.css"/>
+
+            <script type="text/javascript" src="/website_outlet_locator_app/static/src/js/website_locate_store.js"></script>
+
+        </xpath>
+    </template>
+    
+    <template id="layout_logo_show" customize_show="True" name="Shop Locations" t-name="website_outlet_locator_app.store_locator_page">
+        <t t-call="website.layout">
+            <div>
+                <div class="oe_structure"/>
+                <section class="place-location mt16 mb16">
+                    <div class="container-fluid">
+                        <div class="card panel-default">
+                            <div class="card-header" style="background-color:white;">
+                                <div class="row">
+                                    <div class="col-md-4 col-xs-8" style="padding: 0px;">
+                                        <div class="input-group">
+                                            <span class="input-group-append">
+                                                <button class="btn btn-green search-store" type="button"><span class="d-none d-xl-inline-block">Search &amp;nbsp;Oultet&amp;nbsp;&amp;nbsp;</span><i class="fa fa-search"/></button>
+                                            </span>
+                                            <input type="text" name="search-input" id="search-input" class="form-control" />
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-green reset-loc col-xs-2"><i class="fa fa-refresh"/> <span class="d-none d-xl-inline-block">Refresh</span></button>
+                                    <div class="clearfix"/>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-3 d-none d-xl-inline-block" id="menus">
+                                    <div class="card">
+                                        <div class="card-header" style="background: #296448;">
+                                            <b> <span class="stores">
+                                                Available Outlets 
+                                            </span>
+                                            <span class="label label-primary store-head">
+                                                0
+                                            </span></b>
+                                        </div>
+                                    </div>
+                                    <div class="store-lists">
+                                        <ul class="nav nav-pills nav-stacked store-ul"/>
+                                    </div>
+                                </div>
+                                <div class="col-xl-9 col-xs-12" id="map-container">
+                                    <div id="googleMap"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="loader" style="display:none;"/>
+                        <script type="text/javascript" t-att-src="website.map_url()"/>
+                    </div>
+                </section>
+                <div class="oe_structure"/>
+            </div>
+        </t>
+    </template>
+</odoo>

@@ -1,0 +1,18 @@
+Installation Manual
+
+Before Installing this module, Install the following package:
+----------------------
+
+sudo pip3 install googlemaps
+
+then after 
+
+Configure google project and get api key for googlemaps
+
+https://developers.google.com/maps/documentation/javascript/get-api-key
+
+
+-Version 13.0.1.1 : (12/05/20)
+                - Display store images instead of pin in website.
+                - Add website field in stores and display it on website.
+                - Add country search functionality.

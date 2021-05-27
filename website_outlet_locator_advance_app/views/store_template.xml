@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<odoo>
+
+	<template id="assets_frontendss" inherit_id="website.assets_frontend" name="Website Event Track Assets">
+		<xpath expr="." position="inside">
+			<link rel="stylesheet" href="/website_outlet_locator_advance_app/static/src/css/googlemaps.css"/>
+			<script type="text/javascript" src="/website_outlet_locator_advance_app/static/src/js/website_locate_store.js"></script>
+			<link rel="stylesheet" type="text/scss" href="/website_outlet_locator_advance_app/static/src/scss/field.scss"/>
+		</xpath>
+	</template>
+	
+	<template id="layout_logo_show" customize_show="True" name="Shop Locations" inherit_id="website_outlet_locator_app.layout_logo_show">
+		<xpath expr="//t/div" position="replace">
+			<div>
+				<div class="oe_structure"/>
+				<section class="place-location mt16 mb16 container-fluid mt8 store-locations">
+					<div class="container-fluid panel-group">
+						<div class="panel panel-default">
+							<div class="panel-heading row col-md-12" style="height: 6em;background: white;margin: auto;">
+								<div class="col-md-4" style="padding: 0px;">
+									<div class="input-group">
+										<span class="input-group-btn">
+											<button class="btn btn-green search-store" type="button"><span class="d-none d-xl-inline-block">Search&amp;nbsp;Store&amp;nbsp;</span><i class="fa fa-search"/></button>
+										</span>
+										<input type="text" name="search-input" id="search-input" class="form-control" placeholder="Find store from here..."/>
+									</div>
+								</div>
+								<button class="btn btn-green reset-loc col-md-2"><i class="fa fa-refresh"/> <span class="d-none d-xl-inline-block">Refresh</span></button>
+								<div class="col-md-4" style="margin-left: 2%; display: inline-flex;">
+									<span class="categ">Category </span>
+									<div class="o_field_many2manytags o_input o_field_widget" style="border: 1px solid #ced4da; border-radius:0.25rem;margin-bottom: 12%;">
+										<div class="o_field_widget o_field_many2one">
+											<div class="o_input_dropdown">
+												<input type="text" class="o_input ui-autocomplete-input select_categ" style="border-width:0px; border:none; outline:none; border: 0px solid #ced4da; width:100%;"/>
+												<a role="button" class="o_dropdown_button" draggable="false">
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="clearfix"/>
+							</div>
+
+							<div class="row">
+	                            <div class="col-md-3 d-none d-xl-inline-block" id="menus">
+	                                <div class="card">
+	                                    <div class="card-header" style="background: #296448;">
+	                                        <b> <span class="stores">
+	                                            Available Outlets 
+	                                        </span>
+	                                        <span class="label store-head">
+	                                            0
+	                                        </span></b>
+	                                    </div>
+	                                </div>
+	                                <div class="store-lists-card">
+	                                    <ul class="nav nav-pills nav-stacked store-ul"/>
+	                                </div>
+	                            </div>
+	                            <div class="col-xl-9 col-xs-12" id="map-container">
+	                                <div id="googleMap" class="gmap"/>
+	                            </div>
+	                        </div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="loader" style="display:none;"/>
+						<script type="text/javascript" t-att-src="website.map_url()"/>
+					</div>
+				</section>
+				<div class="oe_structure"/>
+			</div>
+		</xpath>
+	</template>
+</odoo>
