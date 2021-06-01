@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="pos_credit_card_charges_template" inherit_id="point_of_sale.template" xml:space="preserve">
+	<t t-name="POSOrderChargesWidget" name="Pos Order Charges">
+        <t t-if = "widget.pos.config.enable_credit_charges">
+        	<div class="control-button button confirm" id="pos_show_credit_charges">
+            	<i class="fa fa-sticky-note"></i> Show Credit Charges
+        	</div>
+        </t>
+   	</t>
+
+    <t t-name="OrderReceiptInherit" t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('receipt-change')]" position="before">
+            <div>Credit Cards Charge <span t-esc="env.pos.format_currency(env.pos.get_order().get_charges())"
+            class="pos-receipt-right-align"/></div>
+            <br/>
+        </xpath>
+    </t>
+
+    <t t-name="OrderWidgetInherit" t-inherit="point_of_sale.OrderWidget" t-inherit-mode="extension" owl="1">
+        <xpath expr="//OrderSummary" position="replace">
+            <OrderSummary total="state.total" tax="state.tax" credit="state.credit_charge"/>
+        </xpath>
+    </t>
+    <t t-name="OrderSummaryInherit" t-inherit="point_of_sale.OrderSummary" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('subentry')]" position="after">
+            <div t-if="props.tax" class="subentry">
+                Credit Charges:
+                <span class="value">
+                    <t t-esc="props.credit"/>
+                </span>
+            </div>
+        </xpath>
+    </t>
+ 
+    <t t-name="PaymentScreenPaymentLinesInherit" t-inherit="point_of_sale.PaymentScreenPaymentLines" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('paymentlines')]" position="replace">
+            <div class="paymentlines">
+                <t t-foreach="props.paymentLines" t-as="line" t-key="line.cid">
+                    <t t-if="line.selected">
+                        <div class="paymentline selected"
+                             t-att-class="selectedLineClass(line)"
+                             t-on-click="trigger('select-payment-line', { cid: line.cid })">
+                            <div class="payment-name">
+                                <t t-esc="line.payment_method.name" />
+                            </div>
+                            <div class="payment-amount">
+                                <t t-if="line and line.payment_status and ['done', 'waitingCard', 'waiting', 'reversing', 'reversed'].includes(line.payment_status)">
+                                        <t t-esc="env.pos.format_currency_no_symbol(line.get_amount())" />
+                                </t>
+                                <t t-else="">
+                                        <t t-esc="formatLineAmount(line)" />
+                                </t>
+                            </div>
+                            <t t-if="!line.payment_status or !['done', 'reversed'].includes(line.payment_status)">
+                                <div class="delete-button"
+                                    t-on-click="trigger('delete-payment-line', { cid: line.cid })"
+                                    aria-label="Delete" title="Delete">
+                                    <i class="fa fa-times-circle" />
+                                </div>
+                            </t>
+                        </div>
+                        <t t-if="line and line.payment_status">
+                            <PaymentScreenElectronicPayment line="line" />
+                        </t>
+                    </t>
+                    <t t-else="">
+                        <div class="paymentline"
+                             t-att-class="unselectedLineClass(line)"
+                             t-on-click="trigger('select-payment-line', { cid: line.cid })">
+                            <div class="payment-name">
+                                 <t t-esc="line.payment_method.name" />
+                            </div>
+                            <div class="payment-amount">
+                                <t t-if="line and line.payment_status and ['done', 'waitingCard', 'waiting', 'reversing', 'reversed'].includes(line.payment_status)">
+                                        <t t-esc="env.pos.format_currency_no_symbol(line.get_amount())" />
+                                </t>
+                                <t t-else="">
+                                    <t t-esc="formatLineAmount(line)" />
+                                </t>
+                            </div>
+                            <t t-if="!line.payment_status or !['done', 'reversed'].includes(line.payment_status)">
+                                <div class="delete-button"
+                                    t-on-click="trigger('delete-payment-line', { cid: line.cid })"
+                                    aria-label="Delete" title="Delete">
+                                    <i class="fa fa-times-circle" />
+                                </div>
+                            </t>
+                        </div>
+                    </t>
+                    <t t-if="line.payment_method.is_credit == true">
+                        <t t-if='env.pos.get_order().get_charges()'>
+                            <tr class='order-charges' t-att-data-cid='0'>
+                                <td style="font-size: 15px; background-color: white; border-radius: 8px; padding: 8px;">Credit Card Charges 
+                                    <t t-esc='env.pos.format_currency_no_symbol(env.pos.get_order().get_charges())' /> 
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                </t>
+            </div>
+        </xpath>
+    </t>
+</templates>

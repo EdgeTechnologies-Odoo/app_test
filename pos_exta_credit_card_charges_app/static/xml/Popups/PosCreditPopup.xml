@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="CreditCardtemplate" xml:space="preserve">
+	<t t-name="PosCreditPopup" owl="1">
+		<div class="modal-dialog" role="modal">
+			<div class="popup popup-confirm">
+				<p class="title" style="background-color: rgb(110,200,155); color: #fff;">Credit Card Charges</p>
+				<br/>
+				<div class='popup-numpad'>
+					<table>
+						<tr>
+							<td style="">
+								Current Order Amount :-
+							</td>
+							<td>
+								<span id ="order_total" name="code">
+									<t t-esc="props.order_total"/>
+								</span>
+							</td>
+						</tr>
+						<br/>
+						<tr>
+							<td style="">
+								Charges of Credit card :-
+							</td>
+							<td>
+								<span id ="credit_charge" name="code">
+									<t t-esc="props.credit_charge"/>
+								</span>
+							</td>
+						</tr>
+						<br/>
+						<tr>
+							<td style="">
+								Total amount with charges :-
+							</td>
+							<td>
+								<span id ="with_charge"  name="code" >
+									<t t-esc="props.with_charge"/>
+								</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="footer" style="background-color: rgb(110,200,155); color: #fff;">
+					<div class="button confirm" style="background-color: #0075AC; color: #fff;" t-on-click="click_confirm">
+						Ok
+					</div>
+				</div>
+			 </div>
+		</div>
+	</t>
+</templates>

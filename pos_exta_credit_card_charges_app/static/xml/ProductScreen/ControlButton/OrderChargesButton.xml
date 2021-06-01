@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="Credittemplate" xml:space="preserve">
+	<t t-name="OrderChargesButton" owl="1">
+		<div class="control-button button confirm" id="pos_show_credit_charges">
+			<i class="fa fa-sticky-note"></i> Show Credit Charges
+		</div>
+	</t>
+</templates>
